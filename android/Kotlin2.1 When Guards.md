@@ -1,0 +1,31 @@
+# 概要
+- Exploring the when guards feature in Kotlin 2.1
+- dev.toの記事
+- https://dev.to/cheesycoderjin/exploring-the-when-guards-feature-in-kotlin-21-5ei4
+
+# 感想
+when guardsを使った方法
+```kotlin
+fun processFile(file: File, isProcessed: Boolean): String {
+    return when (file) {
+        is File.Image if file.resolution > 1080 && !isProcessed -> "High resolution unprocessed image"
+        is File.Image if file.resolution > 1080 -> "High resolution image"
+        is File.Image -> "Image"
+        is File.Document if file.pageCount > 10 && !isProcessed -> "Large unprocessed document"
+        is File.Document -> "Document"
+        File.Video -> "Video"
+    }
+}
+```
+何が変わったか？
+1. フラットな構造
+   1. when guardsを使うと条件分岐がネストせずにフラットな形になります。その結果、コードが読みやすく条件が何を表しているのか直感的に理解しやすくなります。
+2. isチェックを省略できる
+   1. 各when分岐で対象の型や条件をセットで記述できるため、同じ型に対して複数回の分岐を繰り返す冗長さが解消されます。
+3. 例外的な条件を表現しやすい
+   1. `is File.Image if file.resolution > 1080 && !isProcessed`のように、特殊なケースを先に記述して明確に扱えます。複数の条件が絡む場合でも、コードが複雑に見えにくいのが利点です。
+
+# ポイントまとめ
+- 複数条件を組み合わせてチェックする場合に特に有用
+- ネストを排除し、コードをフラットかつ直感的に
+- 冗長な条件の繰り返しや、else分岐の不要化で可読性向上
