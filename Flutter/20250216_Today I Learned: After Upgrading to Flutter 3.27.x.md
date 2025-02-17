@@ -2,7 +2,7 @@
 - Mediumの記事
 - https://benamorn.medium.com/today-i-learned-after-upgrading-to-flutter-3-27-x-d7a267557dd1
 
-# 所感
+# 要約
 Flutter 3.27.Xの破壊的変更がまとめられていて素晴らしい。以下要約
 
 1. Deep Linking
